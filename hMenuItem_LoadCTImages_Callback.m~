@@ -12,7 +12,7 @@ end
 matfd = uigetdir(testfd);
 
 if ~isempty(matfd)
-    data_main.matfd = matfd;
+    dat
     [ptfd, ~] = fileparts(matfd);
     
     % CT

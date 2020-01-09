@@ -63,7 +63,7 @@ g4D = g4Dose/max(g4Dose(:));
 g4Di = interp3(xg_g4, yg_g4, zg_g4, g4D, xg_tps,yg_tps, zg_tps);
 
 %% apply body contour
-fn_matRS = fullfile(data_main.ptfd, data_main.ctFolder, 'RS.mat');
+fn_matRS = fullfile(data_main.matfd, 'RS.mat');
 load(fn_matRS);
 idx = find(contains(SS.sNames, 'Body'));
 %idx = find(contains(SS.sNames, 'External'));

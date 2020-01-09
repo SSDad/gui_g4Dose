@@ -24,7 +24,6 @@ for r = 1:3
     end
 end
 
-%updateCTImages(hFig_main)
 updateXImages(hFig_main, 'CT')
 initSlider(hFig_main);
 updateXLines(hFig_main);
