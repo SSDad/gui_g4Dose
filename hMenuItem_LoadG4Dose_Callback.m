@@ -51,6 +51,7 @@ data_main.G4.downSampling = downSampling;
 
 data_main.G4DoseLoaded = true;
 data_main.hMenuItem.ViewG4Dose.Enable = 'on';
+data_main.hMenuItem.Param.Enable = 'on';
 
 %%
 guidata(hFig_main, data_main);

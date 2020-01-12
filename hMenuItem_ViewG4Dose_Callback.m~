@@ -68,10 +68,9 @@ load(fn_matRS);
 idx = find(contains(SS.sNames, 'Body'));
 if isempty(idx)
     idx = find(contains(SS.sNames, 'External'));
-    if isempty(idx)
-        msgbox('Body or External structure does not exist, please check!');
-        return;
-    end
+else
+    msgbox('Body or External
+    return;
 end
 cont = SS.structures(idx).contours;
 zzC = [cont.z]';
@@ -85,10 +84,7 @@ dy_Dose = data_main.tps.dsInfo.dy;
 dz_Dose = data_main.tps.dsInfo.dz;
 
 nSliceDose = length(data_main.zzTPSDose);
-str1 = data_main.hpp.PTVErode.String;
-idx1 = data_main.hpp.PTVErode.Value;
-junk1 = str2num(str1{idx1});
-SE = strel('disk', junk1);  % erode
+SE = strel('disk', 3);  % erode
 for iSliceDose = 1:nSliceDose
     [~, iSliceC] = min(abs(data_main.tps.dsInfo.zz(iSliceDose) - zzC));
     
@@ -120,13 +116,9 @@ end
 
 %% normalize dose
 % g4
-for n = 1:3
-    str2{n} = data_main.hpp.DoseNormMargin(n).String;
-    idx2(n) = data_main.hpp.DoseNormMargin(n).Value;
-end
-avM = str2num(str2{1}{idx2(1)});
-avN = str2num(str2{2}{idx2(2)});
-avP = str2num(str2{3}{idx2(3)});
+avM = 1;
+avN = 1;
+avP = 1;
 [~, idx] = max(g4Di(:));
 [m,n,p] = ind2sub(size(g4Di), idx);
 junk = g4Di(m-avM:m+avM,n-avN:n+avN,p-avP:p+avP);
