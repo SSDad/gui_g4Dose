@@ -44,8 +44,6 @@ data_main.GammaMap = false;
 data_main.profFigOpen = false;
 data_main.ProfileFig = false;
 
-% data_main.ctFolder = 'matCT_bodySquare_zCut50';
-
 %% save
 guidata(hFig_main, data_main);
                

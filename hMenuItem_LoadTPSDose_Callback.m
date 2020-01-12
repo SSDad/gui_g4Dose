@@ -15,25 +15,25 @@ if ~isempty(dosefd)
         
     load(fn_dsInfo);
     
-%     % compare z
-%     zct1 = data_main.tps.ctInfo.zz(1);
-%     zct2 = data_main.tps.ctInfo.zz(end);
-%     zds1 = dsInfo.zz(1);
-%     zds2 = dsInfo.zz(end);
-%     
-%     idx1 = 1;
-%     idx2 = length(dsInfo.zz);
-%     if zct1 >  zds1
-%         [v1, idx1] = min(abs(dsInfo.zz-zct1));
-%         idx1 = idx1+1;
-%     end
-%     if zct2 < zds2
-%         [v2, idx2] = min(abs(dsInfo.zz-zct2));
-%         idx2 = idx2-1;
-%     end
-%     
-%     Dose = Dose(:,:,idx1:idx2);
-%     dsInfo.zz = dsInfo.zz(idx1:idx2);
+    % zCut
+    zct1 = data_main.tps.ctInfo.zz(1);
+    zct2 = data_main.tps.ctInfo.zz(end);
+    zds1 = dsInfo.zz(1);
+    zds2 = dsInfo.zz(end);
+    
+    idx1 = 1;
+    idx2 = length(dsInfo.zz);
+    if zct1 >  zds1
+        [v1, idx1] = min(abs(dsInfo.zz-zct1));
+        idx1 = idx1+1;
+    end
+    if zct2 < zds2
+        [v2, idx2] = min(abs(dsInfo.zz-zct2));
+        idx2 = idx2-1;
+    end
+    
+    Dose = Dose(:,:,idx1:idx2);
+    dsInfo.zz = dsInfo.zz(idx1:idx2);
     
     % save    
     data_main.tps.Dose = Dose/max(Dose(:));

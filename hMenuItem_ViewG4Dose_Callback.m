@@ -65,8 +65,8 @@ g4Di = interp3(xg_g4, yg_g4, zg_g4, g4D, xg_tps,yg_tps, zg_tps);
 %% apply body contour
 fn_matRS = fullfile(data_main.matfd, 'RS.mat');
 load(fn_matRS);
-idx = find(contains(SS.sNames, 'Body'));
-%idx = find(contains(SS.sNames, 'External'));
+% idx = find(contains(SS.sNames, 'Body'));
+idx = find(contains(SS.sNames, 'External'));
 cont = SS.structures(idx).contours;
 zzC = [cont.z]';
 
@@ -79,7 +79,7 @@ dy_Dose = data_main.tps.dsInfo.dy;
 dz_Dose = data_main.tps.dsInfo.dz;
 
 nSliceDose = length(data_main.zzTPSDose);
-SE = strel('disk', 2);  % erode
+SE = strel('disk', 3);  % erode
 for iSliceDose = 1:nSliceDose
     [~, iSliceC] = min(abs(data_main.tps.dsInfo.zz(iSliceDose) - zzC));
     
@@ -111,9 +111,9 @@ end
 
 %% normalize dose
 % g4
-avM = 0;
-avN = 0;
-avP = 0;
+avM = 1;
+avN = 1;
+avP = 1;
 [~, idx] = max(g4Di(:));
 [m,n,p] = ind2sub(size(g4Di), idx);
 junk = g4Di(m-avM:m+avM,n-avN:n+avN,p-avP:p+avP);
