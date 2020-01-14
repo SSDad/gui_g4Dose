@@ -9,35 +9,35 @@ rrfd = fullfile(data_main.ptfd, 'G4Dose');
 [g4DoseFile, pth] = uigetfile(fullfile(rrfd, '*.csv'));
 ffn = fullfile(pth, g4DoseFile);
 
-g4DoseFileListFN = fullfile(data_main.matfd, 'g4DoseFileList.mat');
-if exist(g4DoseFileListFN, 'file')
-    load(g4DoseFileListFN);
-    idx = find(contains(g4DoseFileList, ffn));
+g4DoseDataFileList = fullfile(data_main.matfd, 'g4DoseFileList.mat');
+if exist(g4DoseDataFileList, 'file')
+    load(g4DoseDataFileList);
+    idx = find(contains(g4DoseFileList, g4DoseFile));
     if ~isempty(idx)
-        g4DoseFileFN = fullfile(data_main.matfd, ['g4Dose_', num2str(idx)]);
-        load(g4DoseFileFN);
+        g4DoseDataFile = fullfile(data_main.matfd, ['g4Dose_', num2str(idx)]);
+        load(g4DoseDataFile);
     else
         idx = length(g4DoseFileList)+1;
-        g4DoseFileList(idx) = string(ffn);
-        save(g4DoseFileListFN, 'g4DoseFileList');
+        g4DoseFileList(idx) = string(g4DoseFile);
+        save(g4DoseDataFileList, 'g4DoseFileList');
 
         g4csvDose = readtable(ffn);
         g4Dose = table2array(g4csvDose);
         g4DoseCol = single(g4Dose(:, 4));
 
-        g4DoseFileFN = fullfile(data_main.matfd, ['g4Dose_', num2str(idx)]); 
-        save(g4DoseFileFN, 'g4DoseCol');
+        g4DoseDataFile = fullfile(data_main.matfd, ['g4Dose_', num2str(idx)]); 
+        save(g4DoseDataFile, 'g4DoseCol');
     end
 else
-    g4DoseFileList(1) = string(ffn);
-    save(g4DoseFileListFN, 'g4DoseFileList');
+    g4DoseFileList(1) = string(g4DoseFile);
+    save(g4DoseDataFileList, 'g4DoseFileList');
 
     g4csvDose = readtable(ffn);
     g4Dose = table2array(g4csvDose);
     g4DoseCol = single(g4Dose(:, 4));
 
-    g4DoseFileFN = fullfile(data_main.matfd, 'g4Dose_1'); 
-    save(g4DoseFileFN, 'g4DoseCol');
+    g4DoseDataFile = fullfile(data_main.matfd, 'g4Dose_1'); 
+    save(g4DoseDataFile, 'g4DoseCol');
 end
     
 data_main.g4DoseCol = g4DoseCol/max(g4DoseCol(:));

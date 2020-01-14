@@ -16,6 +16,7 @@ gamma_dist = str2num(str1{idx1});
 str2 = data_main.hpp.GMP(2).String;
 idx2 = data_main.hpp.GMP(2).Value;
 gamma_percentage = str2num(str2{idx2});
+% gamma_percentage = 5;
 
 [data_main.pp, data_main.gm, ~, ~] = gamma3D_general(dose_vol_1,dose_vol_2,voxel_sizes,gamma_dist,gamma_percentage);
 
